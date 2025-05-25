@@ -12,7 +12,9 @@ phase 1: rollout creation (sample training dataset)
 - do the above steps for N trajectories (batch size of N) and T steps (sequence length of T) and populate next state after T which would be S_{t+1}, states from step 0 to T, actions from step 0 to T, log probs, values, rewards etc
 - with the popualted features, compute advantage function. The advantage function can be computed by traversing from bottom to top with formula:
 $δ_{t} = r_{t} + γV(s_{t+1}) - V(s_{t})$
+
 $\hat{A_{t}} = δ_{t} + γλ\hat{A}_{t+1}$
+
 $return_{t} = \hat{A_{t}} + V_{t}$
 - create a dataloader for training. Load state, log prob of action, action, advantage, return
 
