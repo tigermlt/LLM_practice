@@ -5,6 +5,7 @@ import matplotlib.pylab as plt
 from omegaconf import DictConfig
 
 import torch
+import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
@@ -46,10 +47,13 @@ def create_custom_dataset(raw_dataset):
     df = raw_dataset.to_pandas()
     negative_df = df[df['label']==0]
     positive_df = df[df['label']==1]
+    # remove `label` column and rename `text` column to `rejected`
     negative_df = negative_df.drop(
         columns=['label']).rename(
         columns={'text': 'rejected'})
     # shuffle the data
+    # reset the index to make it from 0 to 12499 rather than 12500 - 24999, this is to join with negative_df
+    # also drop `label` column, rename `text` column to `chosen`
     positive_df = positive_df.sample(
         frac=1, random_state=0).reset_index(
         drop=True).drop(columns=['label']).rename(
