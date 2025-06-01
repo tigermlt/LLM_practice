@@ -10,10 +10,16 @@ Use the facebook/opt-350m as the base model, add a reward head by taking its hid
 
 Training loss is pairwise classification where we minimize:
 
--logsigmoid(r_accept - r_reject)
+`-logsigmoid(r_accept - r_reject)`
 
 Evaluation is done in the test dataset by computing the accuracy metric where we check how many pairs that we have r_accept > r_reject.
 
 The accuracy we got after training 1 epoch is 0.932
 
 # PPO in LLM
+
+## Inference before PPO training vs inference after PPO training
+model after PPO training is easier to generate response with higher reward
+
+Epoch vs return also shows increasing trend:
+![epoch vs return](img/epoch_vs_return.png)
