@@ -17,6 +17,13 @@ Evaluation is done in the test dataset by computing the accuracy metric where we
 The accuracy we got after training 1 epoch is 0.932
 
 # PPO in LLM
+Comparing with the ppo interacting with gym in [here](https://github.com/tigermlt/LLM_practice/blob/main/pure_ppo_from_scratch/ppo.py), ppo in LLM has several differences:
+1. reward model is another LLM which gives reward given input tokens. Also a ref_model is involved in computing reward except for the last token.
+2. actions are input tokens rather than left/right in the CartPole-v1
+3. states are output tokens rather than positions and velocities in the CartPole-v1
+
+Overall they are quite similar (in terms of rollout creation, gae, loss, model update etc).
+
 
 ## Inference before PPO training vs inference after PPO training
 model after PPO training is easier to generate response with higher reward
